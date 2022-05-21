@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 	private Rigidbody2D _body;
-	private Transform _patrolPoint;
+	[SerializeField]private Transform _patrolPoint;
 	private float _patrolDistance = 6f;
 	private float _speed = 5f;
 	private GameObject _player;
@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour
 	private int _damage = 1;
 	private void Start()
 	{
-		_patrolPoint = GameObject.FindGameObjectWithTag("PatrolPoint").transform;
 		_body = GetComponent<Rigidbody2D>();
 		_player = GameObject.FindGameObjectWithTag("Player");
 	}
@@ -77,10 +76,6 @@ public class Enemy : MonoBehaviour
 		}
 		transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, step);
 	}
-	private void ComeBack()
-	{
-
-	}
 	private void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
@@ -90,6 +85,7 @@ public class Enemy : MonoBehaviour
 		if(col.gameObject.tag == "Player")
 		{
 			col.gameObject.GetComponent<Health>().TakeDamage(_damage);
+			col.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 30, ForceMode2D.Impulse);
 		}
 	}
 }

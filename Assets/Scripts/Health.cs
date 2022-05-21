@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Health : MonoBehaviour
 		currentHealth = Mathf.Clamp(currentHealth - damage, 0, _startingHealth);
 		if(currentHealth <= 0)
 		{
-			Destroy(gameObject);
+			SceneManager.LoadScene(0);
 		}
 	}
 }

@@ -8,7 +8,7 @@ public class Fire : MonoBehaviour
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			Destroy(col.gameObject);
+			col.gameObject.GetComponent<Health>().TakeDamage(3);
 		}
 	}
 }
