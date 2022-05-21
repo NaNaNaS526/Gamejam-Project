@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
 	private GameObject _player;
 	private bool _movingRight;
 	private bool _isPatrol = true;
+	private int _damage = 1;
 	private void Start()
 	{
 		_patrolPoint = GameObject.FindGameObjectWithTag("PatrolPoint").transform;
@@ -83,5 +84,12 @@ public class Enemy : MonoBehaviour
 	private void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
+	}
+	private void OnCollisionEnter2D(Collision2D col)
+	{
+		if(col.gameObject.tag == "Player")
+		{
+			col.gameObject.GetComponent<Health>().TakeDamage(_damage);
+		}
 	}
 }
